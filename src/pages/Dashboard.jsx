@@ -31,6 +31,8 @@ const screen = {
 	height: Dimensions.get('window').height
 };
 
+import Monitor from './Dashboard/Monitor';
+
 export default Dashboard = (props) => {
 	const [tab, setTab] = useState('monitor');
 	const monitorRef = useRef();
@@ -79,36 +81,33 @@ export default Dashboard = (props) => {
 					tabBar={(props) => {
 						return (
 							<View style={{ display: 'none' }}>
-								{
-									tab === 'monitor' ?
-										<Button
-											title='About Us'
-											ref={aboutUsRef}
-											onPress={() => {
-												props.navigation.navigate('About Us');
-												try {
-													setTab('about us');
-												} catch (e) {};
-											}}
-										/> :
-										<Button
-											title='Monitor'
-											ref={monitorRef}
-											onPress={() => {
-												props.navigation.navigate('Monitor');
-												try {
-													setTab('monitor');
-												} catch (e) {};
-											}}
-										/>
-								}
+								<Button
+									title='About Us'
+									ref={aboutUsRef}
+									onPress={() => {
+										props.navigation.navigate('About Us');
+										try {
+											setTab('about us');
+										} catch (e) { };
+									}}
+								/> :
+								<Button
+									title='Monitor'
+									ref={monitorRef}
+									onPress={() => {
+										props.navigation.navigate('Monitor');
+										try {
+											setTab('monitor');
+										} catch (e) { };
+									}}
+								/>
 							</View>
 						);
 					}}
 				>
 					<Tab.Screen
 						name='Monitor'
-						component={() => <Heading>monitor</Heading>}
+						component={Monitor}
 						options={{
 							headerShown: false,
 							animation: 'shift'

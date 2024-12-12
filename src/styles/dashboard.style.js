@@ -70,9 +70,16 @@ export default StyleSheet.create({
 		borderRadius: rem(6),
 		zIndex: 5
 	},
-
 	tab: {
 		flex: 1,
 		width: '100%'
+	},
+
+	Monitor: {
+		flex: 1,
+		width: '100%',
+		...padding(rem(2)),
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });

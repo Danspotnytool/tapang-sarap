@@ -1,11 +1,19 @@
 
+import { useState } from 'react';
 import { View } from 'react-native';
-import Text from '../../components/Text';
+
+import style from '../../styles/dashboard.style';
+
+import Input from '../../components/Input';
 
 export default Monitor = () => {
+	const stage = useState('enter code');
+
 	return (
-		<View>
-			<Text>Monitor</Text>
+		<View style={style.Monitor}>
+			<Input
+				placeholder='Enter Code'
+			/>
 		</View>
 	);
 };
