@@ -80,6 +80,7 @@ export default StyleSheet.create({
 		width: '100%',
 		...padding(rem(2)),
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		gap: rem(2)
 	}
 });

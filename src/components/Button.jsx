@@ -1,11 +1,14 @@
 
 import {
-	TouchableOpacity
+	TouchableOpacity,
+	ActivityIndicator
 } from 'react-native';
+
+import { useState } from 'react';
 
 import Heading from './Heading';
 
-import { components } from '../styles/index.style';
+import { components, colors } from '../styles/index.style';
 
 /**
  * @param {import('react-native').TouchableOpacityProps | {
@@ -19,6 +22,8 @@ import { components } from '../styles/index.style';
  * @returns {React.ReactNode}
  */
 export default Button = ({ children, onPress, style }) => {
+	const [loading, setLoading] = useState(false);
+
 	return (
 		<TouchableOpacity
 			style={{
@@ -27,10 +32,11 @@ export default Button = ({ children, onPress, style }) => {
 			}}
 			onPress={onPress ? async (...args) => {
 				args[0].preventDefault();
-				args[0].stopPropagation();
 				args[0].persist();
+				setLoading(true);
 				args[0].target.setNativeProps({ disabled: true });
 				await onPress(...args);
+				setLoading(false);
 				args[0].target.setNativeProps({ disabled: false });
 			} : null}
 		>
@@ -43,6 +49,7 @@ export default Button = ({ children, onPress, style }) => {
 					}
 				}}
 			>
+				{loading ? <ActivityIndicator color={colors.light} /> : null}
 				{children}
 			</Heading>
 		</TouchableOpacity>

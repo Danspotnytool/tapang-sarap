@@ -17,7 +17,7 @@ import { components } from '../styles/index.style';
  * 			container: import('react-native').ViewStyle,
  * 			input: import('react-native').TextStyle
  * 		},
- * 		onChangeText: ((e: NativeSyntheticEvent<TextInputChangeEventData>) => void) | undefined,
+ * 		onChange: ((e: NativeSyntheticEvent<TextInputChangeEventData>) => void) | undefined,
  * 		secureTextEntry: Boolean
  * }} props
  * @returns {React.ReactNode}

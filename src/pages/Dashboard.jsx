@@ -90,7 +90,7 @@ export default Dashboard = (props) => {
 											setTab('about us');
 										} catch (e) { };
 									}}
-								/> :
+								/>
 								<Button
 									title='Monitor'
 									ref={monitorRef}
@@ -107,7 +107,7 @@ export default Dashboard = (props) => {
 				>
 					<Tab.Screen
 						name='Monitor'
-						component={Monitor}
+						component={() => <Monitor />}
 						options={{
 							headerShown: false,
 							animation: 'shift'
