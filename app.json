@@ -19,7 +19,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#2C6333"
-      }
+      },
+	  "package": "com.tapang-sarap.app",
+	  "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

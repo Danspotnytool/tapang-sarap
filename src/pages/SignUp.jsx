@@ -21,8 +21,9 @@ import style from '../styles/signIn.style';
 import BackgroundNoise from '../../assets/Noise.png';
 import { colors } from '../styles/index.style';
 
-export default SignIn = (props) => {
+export default SignUp = () => {
 	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	return (
@@ -43,7 +44,7 @@ export default SignIn = (props) => {
 					}
 				}}
 			>
-				Sign In
+				Sign Up
 			</Heading>
 
 			<View style={style.form}>
@@ -53,18 +54,23 @@ export default SignIn = (props) => {
 				/>
 
 				<Input
+					placeholder='Email'
+					type='email'
+				/>
+
+				<Input
 					placeholder='Password'
 					type='password'
 				/>
 
 				<Button>
-					Sign In
+					Sign Up
 				</Button>
 			</View>
 
 			<Text
 				style={{ text: { color: colors.light } }}
-				onPress={() => props.navigation.navigate('Sign Up')}
+				onPress={() => props.navigation.navigate('Sign In')}
 			>
 				Don't have an account? <Text style={{ text: { color: colors.accent } }}>Sign Up</Text>
 			</Text>

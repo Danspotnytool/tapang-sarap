@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 import React, { useState, useEffect } from 'react';
 
@@ -50,7 +51,17 @@ export default App = () => {
 						component={SignIn}
 
 						options={{
-							headerShown: false
+							headerShown: false,
+							animation: 'slide_from_left'
+						}}
+					/>
+					<Stack.Screen
+						name='Sign Up'
+						component={SignUp}
+
+						options={{
+							headerShown: false,
+							animation: 'slide_from_right'
 						}}
 					/>
 				</Stack.Navigator>

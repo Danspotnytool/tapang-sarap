@@ -1,6 +1,6 @@
 
 import {
-	Text
+	Text as RN_Text
 } from 'react-native';
 
 import { rem, components } from '../styles/index.style';
@@ -10,17 +10,21 @@ import { rem, components } from '../styles/index.style';
  * 		children: React.ReactNode,
  * 		style: {
  * 			text: import('react-native').TextStyle
- * 		}
+ * 		},
+ * 		onPress: (() => async) | ((event: GestureResponderEvent) => void) | undefined
  * }} props
  * @returns {React.ReactNode}
  */
-export default TextComponent = ({ children, style }) => {
+export default Text = ({ children, style, onPress }) => {
 	return (
-		<Text style={{
+		<RN_Text
+			style={{
 			...components.text,
 			...style?.text
-		}}>
+			}}
+			onPress={onPress}
+		>
 			{children}
-		</Text>
+		</RN_Text>
 	);
 };
