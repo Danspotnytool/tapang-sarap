@@ -2,6 +2,7 @@
 import { StyleSheet, Dimensions, StatusBar } from 'react-native';
 
 import { colors, rem, padding } from './index.style';
+import About from '../pages/Dashboard/About';
 
 const screen = {
 	width: Dimensions.get('window').width,
@@ -81,6 +82,15 @@ export default StyleSheet.create({
 		...padding(rem(2)),
 		justifyContent: 'center',
 		alignItems: 'center',
+		gap: rem(2)
+	},
+
+	About: {
+		flex: 1,
+		width: '100%',
+		...padding(rem(2)),
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
 		gap: rem(2)
 	}
 });

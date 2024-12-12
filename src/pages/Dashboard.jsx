@@ -32,6 +32,7 @@ const screen = {
 };
 
 import Monitor from './Dashboard/Monitor';
+import About from './Dashboard/About';
 
 export default Dashboard = (props) => {
 	const [tab, setTab] = useState('monitor');
@@ -115,7 +116,7 @@ export default Dashboard = (props) => {
 					/>
 					<Tab.Screen
 						name='About Us'
-						component={() => <Heading>about us</Heading>}
+						component={() => <About />}
 						options={{
 							headerShown: false,
 							animation: 'shift'
@@ -172,7 +173,11 @@ export default Dashboard = (props) => {
 					<View
 						style={style.navigationButton}
 					>
-						<TouchableNativeFeedback>
+						<TouchableNativeFeedback
+							onPress={() => {
+								props.navigation.navigate('Sign');
+							}}
+						>
 							<Image source={SignOutIcon} style={style.navigationIcon} />
 						</TouchableNativeFeedback>
 					</View>
