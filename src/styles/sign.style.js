@@ -30,11 +30,15 @@ export default StyleSheet.create({
 		height: rem(24),
 		objectFit: 'contain'
 	},
-	form: {
+	tab: {
 		width: '100%',
 		backgroundColor: colors.light,
-		gap: rem(4),
 		borderRadius: rem(2),
 		...padding(rem(2))
+	},
+	form: {
+		height: '100%',
+		backgroundColor: colors.light,
+		gap: rem(2)
 	}
 });

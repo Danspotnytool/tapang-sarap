@@ -27,6 +27,8 @@ export default Button = ({ children, onPress, style }) => {
 			}}
 			onPress={onPress ? async (...args) => {
 				args[0].preventDefault();
+				args[0].stopPropagation();
+				args[0].persist();
 				args[0].target.setNativeProps({ disabled: true });
 				await onPress(...args);
 				args[0].target.setNativeProps({ disabled: false });

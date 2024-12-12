@@ -3,10 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-
-import React, { useState, useEffect } from 'react';
+import Sign from './pages/Sign';
+import Dashboard from './pages/Dashboard';
 
 import AppLoading from 'expo-app-loading';
 import {
@@ -45,23 +43,23 @@ export default App = () => {
 		<>
 			<StatusBar style='auto' />
 			<NavigationContainer>
-				<Stack.Navigator>
+				<Stack.Navigator initialRouteName='Sign'>
 					<Stack.Screen
-						name='Sign In'
-						component={SignIn}
-
-						options={{
-							headerShown: false,
-							animation: 'slide_from_left'
-						}}
-					/>
-					<Stack.Screen
-						name='Sign Up'
-						component={SignUp}
+						name='Sign'
+						component={Sign}
 
 						options={{
 							headerShown: false,
 							animation: 'slide_from_right'
+						}}
+					/>
+					<Stack.Screen
+						name='Dashboard'
+						component={Dashboard}
+
+						options={{
+							headerShown: false,
+							animation: 'slide_from_left'
 						}}
 					/>
 				</Stack.Navigator>

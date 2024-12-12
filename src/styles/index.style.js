@@ -177,6 +177,7 @@ const components = {
 			padding: rem(1),
 			textAlign: 'center',
 			fontSize: rem(2),
+			color: colors.secondary,
 			fontFamily: 'Lora_400Regular'
 		}
 	}),
