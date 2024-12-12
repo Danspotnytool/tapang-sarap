@@ -43,7 +43,10 @@ export default App = () => {
 		<>
 			<StatusBar style='auto' />
 			<NavigationContainer>
-				<Stack.Navigator initialRouteName='Sign'>
+				<Stack.Navigator
+					initialRouteName='Dashboard'
+					screenOptions={{ navigationBarColor: 'transparent' }}
+				>
 					<Stack.Screen
 						name='Sign'
 						component={Sign}
