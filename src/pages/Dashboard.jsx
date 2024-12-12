@@ -40,7 +40,7 @@ export default Dashboard = (props) => {
 
 	useEffect(() => {
 		Animated.timing(highlightLeft, {
-			toValue: tab === 'monitor' ? (screen.width / 2 - rem(6)) : (screen.width / 3 - rem(12) + rem(2)),
+			toValue: tab === 'monitor' ? (screen.width / 2 - rem(6)) : (screen.width / 2 - rem(6) * 3),
 			duration: 250,
 			useNativeDriver: false
 		}).start();

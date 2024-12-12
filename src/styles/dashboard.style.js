@@ -42,7 +42,7 @@ export default StyleSheet.create({
 		width: '100%',
 		height: rem(8),
 		alignItems: 'center',
-		justifyContent: 'space-evenly',
+		justifyContent: 'center',
 		flexDirection: 'row',
 		backgroundColor: colors.primary,
 		borderTopLeftRadius: rem(2),
@@ -50,10 +50,10 @@ export default StyleSheet.create({
 		overflow: 'auto'
 	},
 	navigationButton: {
-		width: rem(6),
+		width: rem(12),
 		height: rem(6),
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	navigationIcon: {
 		position: 'relative',
@@ -66,7 +66,6 @@ export default StyleSheet.create({
 		width: rem(12),
 		height: rem(12),
 		bottom: -rem(2),
-		left: screen.width / 2 - rem(6),
 		backgroundColor: colors.secondary,
 		borderRadius: rem(6),
 		zIndex: 5
