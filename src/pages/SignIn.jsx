@@ -25,6 +25,28 @@ export default SignIn = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const signIn = async () => {
+		console.log('Signing in...');
+		const response = await fetch(`${API_PATH}/users/sign/`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				username,
+				password
+			})
+		});
+
+		if (!response.ok) {
+			const error = await response.json();
+			alert(error.message);
+			return;
+		};
+
+		props.navigation.navigate('Home');
+	};
+
 	return (
 		<SafeAreaView
 			style={style.container}
