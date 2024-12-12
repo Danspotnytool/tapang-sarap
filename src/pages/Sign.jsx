@@ -27,13 +27,6 @@ export default Sign = (props) => {
 
 	const tabHeight = useRef(new Animated.Value(rem(26))).current;
 
-	const navigateToSignIn = () => {
-		setMode('sign in');
-	};
-	const navigateToSignUp = () => {
-		setMode('sign up');
-	};
-
 	useEffect(() => {
 		Animated.timing(tabHeight, {
 			toValue: mode === 'sign in' ? rem(26) + rem(1) : rem(35) + rem(1),
@@ -80,7 +73,7 @@ export default Sign = (props) => {
 											title='Sign In'
 											ref={signIn}
 											onPress={() => {
-												navigateToSignIn();
+												setMode('sign in');
 												props.navigation.navigate('Sign In');
 											}}
 										/> :
@@ -88,7 +81,7 @@ export default Sign = (props) => {
 											title='Sign Up'
 											ref={signUp}
 											onPress={() => {
-												navigateToSignUp();
+												setMode('sign up');
 												props.navigation.navigate('Sign Up');
 											}}
 										/>

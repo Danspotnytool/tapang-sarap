@@ -1,12 +1,16 @@
 
 import { StatusBar } from 'expo-status-bar';
-
-import { useState } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useState, useRef, useEffect } from 'react';
 
 import {
 	View,
 	Image,
 	SafeAreaView,
+	Animated,
+	Dimensions,
+	Button,
+	TouchableNativeFeedback
 } from 'react-native';
 
 import Heading from '../components/Heading';
@@ -20,7 +24,28 @@ import MonitorIcon from '../../assets/Dashboard Icons/Monitor.png';
 import AboutUsIcon from '../../assets/Dashboard Icons/About Us.png';
 import SignOutIcon from '../../assets/Dashboard Icons/Sign Out.png';
 
+const Tab = createBottomTabNavigator();
+
+const screen = {
+	width: Dimensions.get('window').width,
+	height: Dimensions.get('window').height
+};
+
 export default Dashboard = (props) => {
+	const [tab, setTab] = useState('monitor');
+	const monitorRef = useRef();
+	const aboutUsRef = useRef();
+
+	const highlightLeft = useRef(new Animated.Value((screen.width / 2 - rem(6)))).current;
+
+	useEffect(() => {
+		Animated.timing(highlightLeft, {
+			toValue: tab === 'monitor' ? (screen.width / 2 - rem(6)) : (screen.width / 3 - rem(12) + rem(2)),
+			duration: 250,
+			useNativeDriver: false
+		}).start();
+	}, [tab]);
+
 	return (
 		<SafeAreaView style={style.container}>
 			<StatusBar style='auto' />
@@ -30,15 +55,88 @@ export default Dashboard = (props) => {
 				<View style={style.header}>
 					<Image source={BackgroundNoise} style={style.background} />
 					<Heading style={{ heading: { color: colors.light } }}>
-						Dashboard
+						{
+							tab === 'monitor' ? 'Monitor' :
+								tab === 'about us' ? 'About Us' :
+									'Sign Out'
+						}
 					</Heading>
 				</View>
 			</>
 
+			<View
+				style={style.tab}
+			>
+				<Tab.Navigator
+					screenOptions={{
+						tabBarStyle: {
+							backgroundColor: 'transparent'
+						},
+						sceneStyle: {
+							backgroundColor: 'transparent'
+						}
+					}}
+					tabBar={(props) => {
+						return (
+							<View style={{ display: 'none' }}>
+								{
+									tab === 'monitor' ?
+										<Button
+											title='About Us'
+											ref={aboutUsRef}
+											onPress={() => {
+												props.navigation.navigate('About Us');
+												try {
+													setTab('about us');
+												} catch (e) {};
+											}}
+										/> :
+										<Button
+											title='Monitor'
+											ref={monitorRef}
+											onPress={() => {
+												props.navigation.navigate('Monitor');
+												try {
+													setTab('monitor');
+												} catch (e) {};
+											}}
+										/>
+								}
+							</View>
+						);
+					}}
+				>
+					<Tab.Screen
+						name='Monitor'
+						component={() => <Heading>monitor</Heading>}
+						options={{
+							headerShown: false,
+							animation: 'shift'
+						}}
+					/>
+					<Tab.Screen
+						name='About Us'
+						component={() => <Heading>about us</Heading>}
+						options={{
+							headerShown: false,
+							animation: 'shift'
+						}}
+					/>
+					<Tab.Screen
+						name='Sign Out'
+						component={() => <Heading>sign out</Heading>}
+						options={{
+							headerShown: false,
+							animation: 'shift'
+						}}
+					/>
+				</Tab.Navigator>
+			</View>
 
 			<>
-				<View style={{
-					...style.navigationHighlight
+				<Animated.View style={{
+					...style.navigationHighlight,
+					left: highlightLeft
 				}} />
 				<View style={style.navigation}>
 					<Image source={BackgroundNoise} style={{
@@ -50,14 +148,34 @@ export default Dashboard = (props) => {
 						borderTopRightRadius: rem(2)
 					}} />
 
-					<View style={style.navigationButton}>
-						<Image source={AboutUsIcon} style={style.navigationIcon} />
+					<View
+						style={style.navigationButton}
+					>
+						<TouchableNativeFeedback
+							onPress={() => {
+								aboutUsRef.current.props.onPress();
+							}}
+						>
+							<Image source={AboutUsIcon} style={style.navigationIcon} />
+						</TouchableNativeFeedback>
 					</View>
-					<View style={style.navigationButton}>
-						<Image source={MonitorIcon} style={style.navigationIcon} />
+					<View
+						style={style.navigationButton}
+					>
+						<TouchableNativeFeedback
+							onPress={() => {
+								monitorRef.current.props.onPress();
+							}}
+						>
+							<Image source={MonitorIcon} style={style.navigationIcon} />
+						</TouchableNativeFeedback>
 					</View>
-					<View style={style.navigationButton}>
-						<Image source={SignOutIcon} style={style.navigationIcon} />
+					<View
+						style={style.navigationButton}
+					>
+						<TouchableNativeFeedback>
+							<Image source={SignOutIcon} style={style.navigationIcon} />
+						</TouchableNativeFeedback>
 					</View>
 				</View>
 			</>

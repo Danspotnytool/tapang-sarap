@@ -15,7 +15,6 @@ export default StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		gap: rem(6),
 		backgroundColor: colors.light
 	},
 	background: {
@@ -67,8 +66,14 @@ export default StyleSheet.create({
 		width: rem(12),
 		height: rem(12),
 		bottom: -rem(2),
+		left: screen.width / 2 - rem(6),
 		backgroundColor: colors.secondary,
 		borderRadius: rem(6),
 		zIndex: 5
+	},
+
+	tab: {
+		flex: 1,
+		width: '100%'
 	}
 });
