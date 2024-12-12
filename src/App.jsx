@@ -1,3 +1,5 @@
+
+import * as NavigationBar from 'expo-navigation-bar';
 import { StatusBar } from 'expo-status-bar';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,11 +21,15 @@ import {
 	Lora_700Bold_Italic
 } from '@expo-google-fonts/lora';
 
+import { colors } from './styles/index.style';
+
 import BackgroundNoise from '../assets/Noise.png';
 
 const Stack = createNativeStackNavigator();
 
 export default App = () => {
+	NavigationBar.setBackgroundColorAsync(colors.secondary);
+
 	const [fontsLoaded] = useFonts({
 		Lora_400Regular,
 		Lora_500Medium,
@@ -41,11 +47,10 @@ export default App = () => {
 
 	return (
 		<>
-			<StatusBar style='auto' />
+			<StatusBar style='sign' />
 			<NavigationContainer>
 				<Stack.Navigator
-					initialRouteName='Dashboard'
-					screenOptions={{ navigationBarColor: 'transparent' }}
+					initialRouteName='Sign'
 				>
 					<Stack.Screen
 						name='Sign'
@@ -53,7 +58,7 @@ export default App = () => {
 
 						options={{
 							headerShown: false,
-							animation: 'slide_from_right'
+							animation: 'slide_from_left'
 						}}
 					/>
 					<Stack.Screen
@@ -62,7 +67,7 @@ export default App = () => {
 
 						options={{
 							headerShown: false,
-							animation: 'slide_from_left'
+							animation: 'slide_from_right'
 						}}
 					/>
 				</Stack.Navigator>

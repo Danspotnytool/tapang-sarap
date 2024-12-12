@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useRef, useEffect } from 'react';
