@@ -16,7 +16,7 @@ import Heading from '../components/Heading';
 import Button from '../components/Button';
 import Text from '../components/Text';
 
-import style from '../styles/signIn.style';
+import style from '../styles/sign.style';
 
 import BackgroundNoise from '../../assets/Noise.png';
 import { colors } from '../styles/index.style';
@@ -50,11 +50,13 @@ export default SignIn = (props) => {
 				<Input
 					placeholder='Username'
 					type='text'
+					onChange={(e) => setUsername(e.nativeEvent.text)}
 				/>
 
 				<Input
 					placeholder='Password'
 					type='password'
+					onChange={(e) => setPassword(e.nativeEvent.text)}
 				/>
 
 				<Button>

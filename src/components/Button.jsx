@@ -25,7 +25,12 @@ export default Button = ({ children, onPress, style }) => {
 				...components.button.container,
 				...style?.container
 			}}
-			onPress={onPress}
+			onPress={onPress ? async (...args) => {
+				args[0].preventDefault();
+				args[0].target.setNativeProps({ disabled: true });
+				await onPress(...args);
+				args[0].target.setNativeProps({ disabled: false });
+			} : null}
 		>
 			<Heading
 				head='4'
