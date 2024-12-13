@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
 import style from '../../styles/dashboard.style';
 
@@ -11,11 +12,15 @@ import Text from '../../components/Text';
 import { API_PATH } from '../../utils/networking';
 import Heading from '../../components/Heading';
 
+import { colors } from '../../styles/index.style';
+
 export default Monitor = () => {
 	const [stage, setStage] = useState('code');
 	const [code, setCode] = useState('');
 	const [monitorId, setMonitorId] = useState('');
 	const [temperature, setTemperature] = useState(0);
+	const [temperatureMode, setTemperatureMode] = useState('normal');
+	const [data, setData] = useState([0]);
 
 	useEffect(() => {
 		if (stage === 'monitor') {
@@ -26,8 +31,25 @@ export default Monitor = () => {
 					setStage('code');
 					return;
 				};
-				const data = await response.json();
-				setTemperature(data.temperature);
+				const dataJSON = await response.json();
+				setTemperature(dataJSON.temperature);
+				if (dataJSON.normal) {
+					setTemperatureMode('normal');
+				} else if (dataJSON.increasing) {
+					setTemperatureMode('increasing');
+				} else {
+					setTemperatureMode('decreasing');
+				};
+
+				const history = [];
+				for (let i = 0; i < dataJSON.history.length; i++) {
+					console.log(dataJSON.history[i].temperature);
+					history.push(dataJSON.history[i].temperature);
+				};
+				console.log(history);
+
+				setData(history);
+
 			}, 500);
 			return () => clearInterval(interval);
 		};
@@ -67,6 +89,42 @@ export default Monitor = () => {
 						<Text>Monitor ID: {monitorId}</Text>
 						<Text>Temperature:</Text>
 						<Heading head='1'>{temperature}°C</Heading>
+						<Text>{temperatureMode} temperature</Text>
+						<LineChart
+							data={{
+								labels: Array.from({ length: data.length }, (_, i) => i.toString()),
+								datasets: [
+									{
+										data: data
+									}
+								]
+							}}
+							width={Dimensions.get('window').width} // from react-native
+							height={220}
+							yAxisLabel='$'
+							yAxisSuffix='k'
+							yAxisInterval={1} // optional, defaults to 1
+							chartConfig={{
+								backgroundColor: colors.primary,
+								backgroundGradientFrom: colors.primary,
+								backgroundGradientTo: colors.primary,
+								decimalPlaces: 2, // optional, defaults to 2dp
+								color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+								labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+								style: {
+									borderRadius: 16
+								},
+								propsForDots: {
+									r: '6',
+									strokeWidth: '2',
+									stroke: colors.secondary
+								}
+							}}
+							bezier
+							style={{
+								borderRadius: 0
+							}}
+						/>
 					</>
 			}
 		</View>

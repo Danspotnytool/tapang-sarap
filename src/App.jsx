@@ -50,7 +50,7 @@ export default App = () => {
 			<StatusBar style='sign' />
 			<NavigationContainer>
 				<Stack.Navigator
-					initialRouteName='Dashboard'
+					initialRouteName='Sign'
 				>
 					<Stack.Screen
 						name='Sign'
